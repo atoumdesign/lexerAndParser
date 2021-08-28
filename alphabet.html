@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Alfabeto - Analisador léxico</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <div class="container-fluid">
+                        <div class="col-auto">
+                            <button class="btn btn-primary mb-3" onclick=javascript:setAlphabet();>Atualizar</button>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">letras <br> minusculas</th>
+                                    <th scope="col">letras <br> maiusculas</th>
+                                    <th scope="col">números</th>
+                                    <th scope="col">símbolos</th>
+                                    <th scope="col">outros</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-borderless">
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_a">
+                                            <label class="custom-control-label" for="id_a">a</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_A">
+                                            <label class="custom-control-label" for="id_A">A</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_0">
+                                            <label class="custom-control-label" for="id_0">0</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_space">
+                                            <label class="custom-control-label" for="id_space">espaço</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_return">
+                                            <label class="custom-control-label" for="id_return">\n</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_b">
+                                            <label class="custom-control-label" for="id_b">b</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_B">
+                                            <label class="custom-control-label" for="id_B">B</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_1">
+                                            <label class="custom-control-label" for="id_1">1</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_underline">
+                                            <label class="custom-control-label" for="id_underline">_</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_tab">
+                                            <label class="custom-control-label" for="id_tab">\t</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_c">
+                                            <label class="custom-control-label" for="id_c">c</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_C">
+                                            <label class="custom-control-label" for="id_C">C</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_2">
+                                            <label class="custom-control-label" for="id_2">2</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_lt">
+                                            <label class="custom-control-label" for="id_lt">&#60;</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_d">
+                                            <label class="custom-control-label" for="id_d">d</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_D">
+                                            <label class="custom-control-label" for="id_D">D</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_3">
+                                            <label class="custom-control-label" for="id_3">3</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_gt">
+                                            <label class="custom-control-label" for="id_gt">&#62;</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_e">
+                                            <label class="custom-control-label" for="id_e">e</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_E">
+                                            <label class="custom-control-label" for="id_E">E</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_4">
+                                            <label class="custom-control-label" for="id_4">4</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_lp">
+                                            <label class="custom-control-label" for="id_lp">(</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_f">
+                                            <label class="custom-control-label" for="id_f">f</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_F">
+                                            <label class="custom-control-label" for="id_F">F</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_5">
+                                            <label class="custom-control-label" for="id_5">5</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_rp">
+                                            <label class="custom-control-label" for="id_rp">)</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_g">
+                                            <label class="custom-control-label" for="id_g">g</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_G">
+                                            <label class="custom-control-label" for="id_G">G</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_6">
+                                            <label class="custom-control-label" for="id_6">6</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_eq">
+                                            <label class="custom-control-label" for="id_eq">=</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_h">
+                                            <label class="custom-control-label" for="id_h">h</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_H">
+                                            <label class="custom-control-label" for="id_H">H</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_7">
+                                            <label class="custom-control-label" for="id_7">7</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_plus">
+                                            <label class="custom-control-label" for="id_plus">+</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_i">
+                                            <label class="custom-control-label" for="id_i">i</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_I">
+                                            <label class="custom-control-label" for="id_I">I</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_8">
+                                            <label class="custom-control-label" for="id_8">8</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_minus">
+                                            <label class="custom-control-label" for="id_minus">-</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_j">
+                                            <label class="custom-control-label" for="id_j">j</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_J">
+                                            <label class="custom-control-label" for="id_J">J</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_9">
+                                            <label class="custom-control-label" for="id_9">9</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_asterisk">
+                                            <label class="custom-control-label" for="id_asterisk">*</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_k">
+                                            <label class="custom-control-label" for="id_k">k</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_K">
+                                            <label class="custom-control-label" for="id_K">K</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_solidus">
+                                            <label class="custom-control-label" for="id_solidus">/</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_l">
+                                            <label class="custom-control-label" for="id_l">l</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_L">
+                                            <label class="custom-control-label" for="id_L">L</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_m">
+                                            <label class="custom-control-label" for="id_m">m</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_M">
+                                            <label class="custom-control-label" for="id_M">M</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_n">
+                                            <label class="custom-control-label" for="id_n">n</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_N">
+                                            <label class="custom-control-label" for="id_N">N</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_o">
+                                            <label class="custom-control-label" for="id_o">o</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_O">
+                                            <label class="custom-control-label" for="id_O">O</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_p">
+                                            <label class="custom-control-label" for="id_p">p</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_P">
+                                            <label class="custom-control-label" for="id_P">P</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_q">
+                                            <label class="custom-control-label" for="id_q">q</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_Q">
+                                            <label class="custom-control-label" for="id_Q">Q</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_r">
+                                            <label class="custom-control-label" for="id_r">r</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_R">
+                                            <label class="custom-control-label" for="id_R">R</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_s">
+                                            <label class="custom-control-label" for="id_s">s</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_S">
+                                            <label class="custom-control-label" for="id_S">S</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_t">
+                                            <label class="custom-control-label" for="id_t">t</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_T">
+                                            <label class="custom-control-label" for="id_T">T</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_u">
+                                            <label class="custom-control-label" for="id_u">u</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_U">
+                                            <label class="custom-control-label" for="id_U">U</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_v">
+                                            <label class="custom-control-label" for="id_v">v</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_V">
+                                            <label class="custom-control-label" for="id_V">V</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_w">
+                                            <label class="custom-control-label" for="id_w">w</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_W">
+                                            <label class="custom-control-label" for="id_W">W</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_x">
+                                            <label class="custom-control-label" for="id_x">x</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_X">
+                                            <label class="custom-control-label" for="id_X">X</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_y">
+                                            <label class="custom-control-label" for="id_y">y</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_Y">
+                                            <label class="custom-control-label" for="id_Y">Y</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_z">
+                                            <label class="custom-control-label" for="id_z">z</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="id_Z">
+                                            <label class="custom-control-label" for="id_Z">Z</label>
+                                        </div>
+                                    </td>
+                                </tr>                                  
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/lex.js"></script>
+    <script src="js/defaultPage.js"></script>
+    <script>
+        getAlphabet();
+    </script>
+    
+</body>
+
+</html>
